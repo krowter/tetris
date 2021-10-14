@@ -14,6 +14,12 @@ const drawShape = (context, _shape, x, y) => {
   return shape;
 };
 
+const bakeTiles = (bakedTilesCoordinate, tilesCoordinate) => {
+  tilesCoordinate.forEach(tile => {
+    bakedTilesCoordinate[tile[1] - 1 + 1][tile[0]] = 1;
+  });
+};
+
 const isColliding = (bakedTilesCoordinate, tiles) => {
   for (let i = 0; i < tiles.length; i++) {
     const tile = tiles[i];

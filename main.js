@@ -51,7 +51,7 @@ function drawFrame(context) {
   setTimeout(() => {
     if (isColliding(bakedTilesCoordinate, tilesCoordinate)) {
       spawnNewTile();
-      bakeTiles(tilesCoordinate);
+      bakeTiles(bakedTilesCoordinate, tilesCoordinate);
     }
 
     drawFrame(context);
