@@ -10,14 +10,17 @@ const drawShape = (context, _shape, x, y) => {
   shape.forEach(([deltaX, deltaY]) => {
     drawTile(context, x + deltaX * tileSize, y + deltaY * tileSize);
   });
+
+  return shape;
 };
 
 const isColliding = (bakedTilesCoordinate, tiles) => {
-  tiles.forEach(tile => {
-    if (bakedTilesCoordinate[tile.y + 1][tile.x] === 1) {
+  for (let i = 0; i < tiles.length; i++) {
+    const tile = tiles[i];
+    if (bakedTilesCoordinate[tile[1] + 1][tile[0]] === 1) {
       return true;
     }
-  });
+  }
 };
 
 // clear canvas for redrawing and draw baked tiles
@@ -27,8 +30,8 @@ const clearCanvas = (context, bakedTilesCoordinate) => {
   bakedTilesCoordinate.forEach((row, rowIndex) => {
     row.forEach((tile, columnIndex) => {
       if (tile === 1) {
-        const positionX = rowIndex * tileSize;
-        const positionY = columnIndex * tileSize;
+        const positionX = columnIndex * tileSize;
+        const positionY = rowIndex * tileSize;
 
         context.beginPath();
         drawTile(context, positionX, positionY);
@@ -50,7 +53,10 @@ const createObject = ({ x, y }) => {
         positionY += tileSize;
       }
 
-      drawShape(context, "I", x, positionY);
+      return {
+        shape: drawShape(context, "I", x, positionY),
+        position: { x, y: positionY }
+      };
     },
     bakeToCanvas: () => {}
   };
