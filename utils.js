@@ -55,13 +55,13 @@ const clearCanvas = (context, bakedTilesCoordinate) => {
 };
 
 const checkTilesForPoints = bakedTilesCoordinate => {
-  const firstRow = bakedTilesCoordinate.slice(-1)[0];
-
-  if (firstRow.every(tile => tile === 1)) {
-    bakedTilesCoordinate.pop();
-    bakedTilesCoordinate.unshift([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-    return canvasWidth;
-  }
+  bakedTilesCoordinate.forEach(row => {
+    if (row.every(tile => tile === 1)) {
+      bakedTilesCoordinate.pop();
+      bakedTilesCoordinate.unshift([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+      return canvasWidth;
+    }
+  });
 
   return null;
 };
@@ -73,7 +73,6 @@ const createObject = ({ shape, x, y }) => {
     rotation = 0;
 
   document.body.addEventListener("keydown", event => {
-    console.log(event.key);
     if (event.key === "ArrowRight") {
       positionX += tileSize;
     }
