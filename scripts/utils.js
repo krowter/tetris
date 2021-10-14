@@ -107,7 +107,9 @@ const createObject = ({ shape, x, y }) => {
         const points = checkTilesForPoints(bakedTilesCoordinate);
 
         if (points) {
-          document.getElementById("points").innerHTML = points;
+          const currentPoint = document.getElementById("points").textContent;
+          document.getElementById("points").innerHTML =
+            parseInt(currentPoint) + points;
         }
       }
     }
