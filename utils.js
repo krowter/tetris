@@ -23,6 +23,13 @@ const bakeTiles = (bakedTilesCoordinate, tilesCoordinate) => {
 const isColliding = (bakedTilesCoordinate, tiles) => {
   for (let i = 0; i < tiles.length; i++) {
     const tile = tiles[i];
+
+    // collision with bottom of canvas
+    if ((tile[1] + 2) * tileSize > canvas.height) {
+      return true;
+    }
+
+    // collision with another tile
     if (bakedTilesCoordinate[tile[1] + 1][tile[0]] === 1) {
       return true;
     }
@@ -47,20 +54,16 @@ const clearCanvas = (context, bakedTilesCoordinate) => {
   });
 };
 
-const createObject = ({ x, y }) => {
+const createObject = ({ shape, x, y }) => {
   let positionY = y;
 
   return {
     draw: () => {
       // calculate collision in y-direction
-      if (positionY + 2 * tileSize > canvas.height) {
-        positionY = canvas.height - tileSize;
-      } else {
-        positionY += tileSize;
-      }
+      positionY += tileSize;
 
       return {
-        shape: drawShape(context, "I", x, positionY),
+        shape: drawShape(context, shape, x, positionY),
         position: { x, y: positionY }
       };
     },

@@ -36,7 +36,7 @@ bakedTilesCoordinate[8][5] = 1;
 
 let newTile;
 const spawnNewTile = () => {
-  newTile = createObject({ x: 200, y: 0 });
+  newTile = createObject({ shape: "I", x: 200, y: 0 });
 };
 
 function drawFrame(context) {
