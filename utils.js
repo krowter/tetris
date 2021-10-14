@@ -48,9 +48,7 @@ const clearCanvas = (context, bakedTilesCoordinate) => {
         const positionX = columnIndex * tileSize;
         const positionY = rowIndex * tileSize;
 
-        context.beginPath();
         drawTile(context, positionX, positionY);
-        context.stroke();
       }
     });
   });
