@@ -54,6 +54,18 @@ const clearCanvas = (context, bakedTilesCoordinate) => {
   });
 };
 
+const checkTilesForPoints = bakedTilesCoordinate => {
+  const firstRow = bakedTilesCoordinate.slice(-1)[0];
+
+  if (firstRow.every(tile => tile === 1)) {
+    bakedTilesCoordinate.pop();
+    bakedTilesCoordinate.unshift([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+    return canvasWidth;
+  }
+
+  return null;
+};
+
 // create a shape and return callback to draw it
 const createObject = ({ shape, x, y }) => {
   let positionY = y,
@@ -79,8 +91,14 @@ const createObject = ({ shape, x, y }) => {
       ]);
 
       if (isColliding(bakedTilesCoordinate, tilesCoordinate)) {
-        spawnNewTile();
         bakeTiles(bakedTilesCoordinate, tilesCoordinate);
+        spawnNewTile();
+
+        const points = checkTilesForPoints(bakedTilesCoordinate);
+
+        if (points) {
+          document.getElementById("points").innerHTML = points;
+        }
       }
     }
   };
