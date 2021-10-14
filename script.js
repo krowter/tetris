@@ -68,12 +68,17 @@ const createObject = ({ x, y }) => {
   };
 };
 
-const object1 = createObject({ x: 200, y: 0 });
+let newTile;
+const spawnNewTile = () => {
+  newTile = createObject({ x: 200, y: 0 });
+};
+
 function drawFrame() {
   clearCanvas(context, bakedTilesCoordinate);
-  object1.draw();
+  newTile.draw();
 
   setTimeout(drawFrame, globalStepRate);
 }
 
+spawnNewTile();
 drawFrame();
