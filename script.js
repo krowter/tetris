@@ -62,7 +62,7 @@ const createObject = ({ x, y }) => {
         positionY += tileSize;
       }
 
-      drawShape.L(x, positionY);
+      drawShape("I", x, positionY);
     },
     bakeToCanvas: () => {}
   };
