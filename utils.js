@@ -69,21 +69,27 @@ const checkTilesForPoints = bakedTilesCoordinate => {
 // create a shape and return callback to draw it
 const createObject = ({ shape, x, y }) => {
   let positionY = y,
-    positionX = x;
+    positionX = x,
+    rotation = 0;
 
   document.body.addEventListener("keydown", event => {
+    console.log(event.key);
     if (event.key === "ArrowRight") {
       positionX += tileSize;
     }
     if (event.key === "ArrowLeft") {
       positionX -= tileSize;
     }
+    if (event.key === "ArrowUp") {
+      rotation += 90;
+      rotation %= 360;
+    }
   });
 
   return {
     draw: () => {
       positionY += tileSize;
-      const tiles = drawShape(context, shape, positionX, positionY);
+      const tiles = drawShape(context, shape + rotation, positionX, positionY);
 
       const tilesCoordinate = tiles.map(tile => [
         tile[0] + positionX / tileSize,
