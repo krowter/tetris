@@ -26,6 +26,7 @@ for (let height = 0; height < canvasHeight; height++) {
   }
   bakedTilesCoordinate.push(row);
 }
+
 /*
  * drawing functions
  */
@@ -39,8 +40,8 @@ const clearCanvas = (context, bakedTilesCoordinate) => {
   bakedTilesCoordinate.forEach((row, rowIndex) => {
     row.forEach((tile, columnIndex) => {
       if (tile === 1) {
-        const positionX = (rowIndex + 1) * tileSize;
-        const positionY = (columnIndex + 1) * tileSize;
+        const positionX = rowIndex * tileSize;
+        const positionY = columnIndex * tileSize;
 
         context.beginPath();
         context.rect(positionX, positionY, tileSize, tileSize);
