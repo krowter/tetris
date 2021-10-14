@@ -1,13 +1,25 @@
+/*
+ * constants
+ */
+
 const tileSize = 40; // px
 const globalStepRate = 300; // miliseconds
-const canvasHeight = 400;
-const canvasWidth = 400;
+const canvasHeight = 400; // px
+const canvasWidth = 400; // px
+
+/*
+ * setup canvas
+ */
 
 const canvas = document.getElementById("game");
 const context = canvas.getContext("2d");
 
 canvas.height = canvasHeight;
 canvas.width = canvasWidth;
+
+/*
+ * draw objects
+ */
 
 const drawShape = shapeCreator(context);
 
