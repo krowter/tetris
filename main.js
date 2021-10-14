@@ -41,19 +41,9 @@ const spawnNewTile = () => {
 
 function drawFrame(context) {
   clearCanvas(context, bakedTilesCoordinate);
-  const { shape, position } = newTile.draw();
-
-  const tilesCoordinate = shape.map(tile => [
-    tile[0] + position.x / tileSize,
-    tile[1] + position.y / tileSize
-  ]);
+  newTile.draw();
 
   setTimeout(() => {
-    if (isColliding(bakedTilesCoordinate, tilesCoordinate)) {
-      spawnNewTile();
-      bakeTiles(bakedTilesCoordinate, tilesCoordinate);
-    }
-
     drawFrame(context);
   }, globalStepRate);
 }

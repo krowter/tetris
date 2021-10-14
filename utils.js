@@ -71,11 +71,17 @@ const createObject = ({ shape, x, y }) => {
   return {
     draw: () => {
       positionY += tileSize;
+      const tiles = drawShape(context, shape, positionX, positionY);
 
-      return {
-        shape: drawShape(context, shape, positionX, positionY),
-        position: { x: positionX, y: positionY }
-      };
+      const tilesCoordinate = tiles.map(tile => [
+        tile[0] + positionX / tileSize,
+        tile[1] + positionY / tileSize
+      ]);
+
+      if (isColliding(bakedTilesCoordinate, tilesCoordinate)) {
+        spawnNewTile();
+        bakeTiles(bakedTilesCoordinate, tilesCoordinate);
+      }
     }
   };
 };
