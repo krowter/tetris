@@ -55,13 +55,15 @@ const clearCanvas = (context, bakedTilesCoordinate) => {
 };
 
 const checkTilesForPoints = bakedTilesCoordinate => {
-  bakedTilesCoordinate.forEach(row => {
+  for (let i = 0; i < bakedTilesCoordinate.length; i++) {
+    const row = bakedTilesCoordinate[i];
+
     if (row.every(tile => tile === 1)) {
       bakedTilesCoordinate.pop();
       bakedTilesCoordinate.unshift([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
       return canvasWidth;
     }
-  });
+  }
 
   return null;
 };
