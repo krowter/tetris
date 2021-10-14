@@ -1,6 +1,6 @@
 # Tetris using HTML, CSS, JS
 
-![preview](./preview.gif)
+![preview](./assets/preview.gif)
 
 ## Controls
 
