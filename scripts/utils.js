@@ -60,7 +60,10 @@ const checkTilesForPoints = bakedTilesCoordinate => {
 
     if (row.every(tile => tile === 1)) {
       bakedTilesCoordinate.pop();
-      bakedTilesCoordinate.unshift([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+
+      const emptyRow = Array.from(Array(canvasWidth)).map(() => 0);
+
+      bakedTilesCoordinate.unshift(emptyRow);
       return canvasWidth;
     }
   }
