@@ -2,10 +2,10 @@
  * constants
  */
 
-const tileSize = 40; // px / tiles
-const globalStepRate = 300; // miliseconds
-const canvasHeight = 10; // tiles
-const canvasWidth = 10; // tiles
+const tileSize = 20; // px / tiles
+const globalStepRate = 150; // miliseconds
+const canvasHeight = 20; // tiles
+const canvasWidth = 20; // tiles
 
 /*
  * setup canvas
@@ -27,16 +27,13 @@ for (let height = 0; height < canvasHeight; height++) {
   bakedTilesCoordinate.push(row);
 }
 
-bakedTilesCoordinate[9][5] = 1;
-bakedTilesCoordinate[8][5] = 1;
-
 /*
  * driver function
  */
 
 let newTile;
 const spawnNewTile = () => {
-  newTile = createObject({ shape: "I", x: 200, y: 0 });
+  newTile = createObject({ shape: "L", x: 200, y: 0 });
 };
 
 function drawFrame(context) {
