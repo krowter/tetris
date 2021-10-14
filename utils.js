@@ -56,17 +56,26 @@ const clearCanvas = (context, bakedTilesCoordinate) => {
 
 // create a shape and return callback to draw it
 const createObject = ({ shape, x, y }) => {
-  let positionY = y;
+  let positionY = y,
+    positionX = x;
+
+  document.body.addEventListener("keydown", event => {
+    if (event.key === "ArrowRight") {
+      positionX += tileSize;
+    }
+    if (event.key === "ArrowLeft") {
+      positionX -= tileSize;
+    }
+  });
 
   return {
     draw: () => {
       positionY += tileSize;
 
       return {
-        shape: drawShape(context, shape, x, positionY),
-        position: { x, y: positionY }
+        shape: drawShape(context, shape, positionX, positionY),
+        position: { x: positionX, y: positionY }
       };
-    },
-    bakeToCanvas: () => {}
+    }
   };
 };
