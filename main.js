@@ -27,23 +27,36 @@ for (let height = 0; height < canvasHeight; height++) {
   bakedTilesCoordinate.push(row);
 }
 
-bakedTilesCoordinate[7][9] = 1;
+bakedTilesCoordinate[9][5] = 1;
+bakedTilesCoordinate[8][5] = 1;
 
 /*
  * driver function
  */
 
-function drawFrame(context) {
-  clearCanvas(context, bakedTilesCoordinate);
-  newTile.draw();
-
-  setTimeout(() => drawFrame(context), globalStepRate);
-}
-
 let newTile;
 const spawnNewTile = () => {
   newTile = createObject({ x: 200, y: 0 });
 };
+
+function drawFrame(context) {
+  clearCanvas(context, bakedTilesCoordinate);
+  const { shape, position } = newTile.draw();
+
+  const tilesCoordinate = shape.map(tile => [
+    tile[0] + position.x / tileSize,
+    tile[1] + position.y / tileSize
+  ]);
+
+  setTimeout(() => {
+    if (isColliding(bakedTilesCoordinate, tilesCoordinate)) {
+      spawnNewTile();
+      bakeTiles(tilesCoordinate);
+    }
+
+    drawFrame(context);
+  }, globalStepRate);
+}
 
 spawnNewTile();
 drawFrame(context);
