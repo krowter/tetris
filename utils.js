@@ -4,6 +4,7 @@ const drawTile = (context, x, y) => {
   context.stroke();
 };
 
+// draw shapes based on _shape param: L or I
 const drawShape = (context, _shape, x, y) => {
   const shape = shapes[_shape];
 
@@ -14,6 +15,7 @@ const drawShape = (context, _shape, x, y) => {
   return shape;
 };
 
+// draw tiles into bakedTilesCoordinate so it gets drawn on next clearCanvas
 const bakeTiles = (bakedTilesCoordinate, tilesCoordinate) => {
   tilesCoordinate.forEach(tile => {
     bakedTilesCoordinate[tile[1] - 1 + 1][tile[0]] = 1;
@@ -54,12 +56,12 @@ const clearCanvas = (context, bakedTilesCoordinate) => {
   });
 };
 
+// create a shape and return callback to draw it
 const createObject = ({ shape, x, y }) => {
   let positionY = y;
 
   return {
     draw: () => {
-      // calculate collision in y-direction
       positionY += tileSize;
 
       return {
