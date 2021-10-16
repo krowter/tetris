@@ -49,7 +49,7 @@ for (let height = 0; height < canvasHeight; height++) {
 
 let newShape;
 const spawnNewShape = () => {
-  const shapes = ["L", "I"];
+  const shapes = ["L", "I", "S", "Z"];
   newShape = createShape({ shape: pickRandomItem(shapes), x: 200, y: 0 });
 };
 
