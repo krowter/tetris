@@ -41,11 +41,7 @@ function drawFrame(context) {
 
   const tiles = newShape.draw();
   newShape.checkCollision(tiles);
-
-  setTimeout(() => {
-    drawFrame(context);
-  }, globalStepRate);
 }
 
 spawnNewShape();
-drawFrame(context);
+setInterval(() => drawFrame(context), globalStepRate);
