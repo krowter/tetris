@@ -7,18 +7,21 @@ const canvasHeight = 20; // tiles
 const canvasWidth = 20; // tiles
 
 const defaultStepRate = 300; // miliseconds
-const globalStepRate = {
-  current: defaultStepRate,
-  get value() {
-    return this.current;
-  },
-  setTo(value) {
-    this.current = value;
-  },
-  reset() {
-    this.current = defaultStepRate;
-  }
-};
+const globalStepRate = (() => {
+  let current = defaultStepRate;
+
+  return {
+    get value() {
+      return current;
+    },
+    setTo(value) {
+      current = value;
+    },
+    reset() {
+      current = defaultStepRate;
+    }
+  };
+})();
 
 /*
  * setup canvas
