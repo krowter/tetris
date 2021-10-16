@@ -33,7 +33,7 @@ for (let height = 0; height < canvasHeight; height++) {
 
 let newShape;
 const spawnNewShape = () => {
-  newShape = createObject({ shape: "L", x: 200, y: 0 });
+  newShape = createShape({ shape: "L", x: 200, y: 0 });
 };
 
 function drawFrame(context) {
