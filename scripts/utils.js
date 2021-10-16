@@ -68,22 +68,24 @@ const clearCanvas = (context, bakedTilesCoordinate) => {
 };
 
 const checkTilesForPoints = bakedTilesCoordinate => {
+  let fullRowIndexes = [];
+
   for (let i = 0; i < bakedTilesCoordinate.length; i++) {
     const row = bakedTilesCoordinate[i];
 
     if (row.every(tile => tile === 1)) {
-      bakedTilesCoordinate.pop();
-
-      const emptyRow = Array.from(Array(canvasWidth)).map(() => 0);
-
-      bakedTilesCoordinate.unshift(emptyRow);
-
-      // use canvas width as points, ie 20 tiles worth 20 points
-      return canvasWidth;
+      fullRowIndexes.push(i);
     }
   }
 
-  return null;
+  const emptyRow = Array.from(Array(canvasWidth)).map(() => 0);
+  fullRowIndexes.forEach(index => {
+    bakedTilesCoordinate.splice(index, 1);
+    bakedTilesCoordinate.unshift(emptyRow);
+  });
+
+  // use canvas width as points, ie 20 tiles worth 20 points
+  return canvasWidth * fullRowIndexes.length;
 };
 
 // create a shape and return callback to draw it
