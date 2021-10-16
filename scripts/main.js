@@ -49,7 +49,8 @@ for (let height = 0; height < canvasHeight; height++) {
 
 let newShape;
 const spawnNewShape = () => {
-  newShape = createShape({ shape: "L", x: 200, y: 0 });
+  const shapes = ["L", "I"];
+  newShape = createShape({ shape: pickRandomItem(shapes), x: 200, y: 0 });
 };
 
 function drawFrame(context) {
