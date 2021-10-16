@@ -31,19 +31,21 @@ for (let height = 0; height < canvasHeight; height++) {
  * driver function
  */
 
-let newTile;
-const spawnNewTile = () => {
-  newTile = createObject({ shape: "L", x: 200, y: 0 });
+let newShape;
+const spawnNewShape = () => {
+  newShape = createObject({ shape: "L", x: 200, y: 0 });
 };
 
 function drawFrame(context) {
   clearCanvas(context, bakedTilesCoordinate);
-  newTile.draw();
+
+  const tiles = newShape.draw();
+  newShape.checkCollision(tiles);
 
   setTimeout(() => {
     drawFrame(context);
   }, globalStepRate);
 }
 
-spawnNewTile();
+spawnNewShape();
 drawFrame(context);

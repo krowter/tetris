@@ -94,7 +94,9 @@ const createObject = ({ shape, x, y }) => {
     draw: () => {
       positionY += tileSize;
       const tiles = drawShape(context, shape + rotation, positionX, positionY);
-
+      return tiles;
+    },
+    checkCollision: tiles => {
       const tilesCoordinate = tiles.map(tile => [
         tile[0] + positionX / tileSize,
         tile[1] + positionY / tileSize
@@ -102,7 +104,7 @@ const createObject = ({ shape, x, y }) => {
 
       if (isColliding(bakedTilesCoordinate, tilesCoordinate)) {
         bakeTiles(bakedTilesCoordinate, tilesCoordinate);
-        spawnNewTile();
+        spawnNewShape();
 
         const points = checkTilesForPoints(bakedTilesCoordinate);
 
