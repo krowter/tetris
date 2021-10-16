@@ -3,9 +3,22 @@
  */
 
 const tileSize = 20; // px / tiles
-const globalStepRate = 150; // miliseconds
 const canvasHeight = 20; // tiles
 const canvasWidth = 20; // tiles
+
+const defaultStepRate = 300; // miliseconds
+const globalStepRate = {
+  current: defaultStepRate,
+  get value() {
+    return this.current;
+  },
+  setTo(value) {
+    this.current = value;
+  },
+  reset() {
+    this.current = defaultStepRate;
+  }
+};
 
 /*
  * setup canvas
@@ -41,7 +54,9 @@ function drawFrame(context) {
 
   newShape.draw();
   newShape.checkCollision();
+
+  setTimeout(() => drawFrame(context), globalStepRate.value);
 }
 
 spawnNewShape();
-setInterval(() => drawFrame(context), globalStepRate);
+drawFrame(context);

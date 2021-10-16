@@ -104,7 +104,17 @@ const createShape = ({ shape, x, y }) => {
       rotation += 90;
       rotation %= 360;
     }
+    if (event.key === "ArrowDown") {
+      globalStepRate.setTo(50);
+    }
   });
+
+  document.body.addEventListener("keyup", event => {
+    if (event.key === "ArrowDown") {
+      globalStepRate.reset();
+    }
+  });
+
   return {
     draw: () => {
       positionY += tileSize;
