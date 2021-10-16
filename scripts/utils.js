@@ -1,7 +1,7 @@
 const drawTile = (context, x, y) => {
   context.beginPath();
   context.rect(x, y, tileSize, tileSize);
-  context.stroke();
+  context.fill();
 };
 
 // draw shapes based on _shape param: L or I
