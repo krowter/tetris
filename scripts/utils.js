@@ -77,6 +77,8 @@ const checkTilesForPoints = bakedTilesCoordinate => {
       const emptyRow = Array.from(Array(canvasWidth)).map(() => 0);
 
       bakedTilesCoordinate.unshift(emptyRow);
+
+      // use canvas width as points, ie 20 tiles worth 20 points
       return canvasWidth;
     }
   }
