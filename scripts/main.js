@@ -39,8 +39,8 @@ const spawnNewShape = () => {
 function drawFrame(context) {
   clearCanvas(context, bakedTilesCoordinate);
 
-  const tiles = newShape.draw();
-  newShape.checkCollision(tiles);
+  newShape.draw();
+  newShape.checkCollision();
 }
 
 spawnNewShape();

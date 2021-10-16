@@ -75,7 +75,8 @@ const checkTilesForPoints = bakedTilesCoordinate => {
 const createObject = ({ shape, x, y }) => {
   let positionY = y,
     positionX = x,
-    rotation = 0;
+    rotation = 0,
+    tiles = [];
 
   document.body.addEventListener("keydown", event => {
     if (event.key === "ArrowRight") {
@@ -93,10 +94,9 @@ const createObject = ({ shape, x, y }) => {
   return {
     draw: () => {
       positionY += tileSize;
-      const tiles = drawShape(context, shape + rotation, positionX, positionY);
-      return tiles;
+      tiles = drawShape(context, shape + rotation, positionX, positionY);
     },
-    checkCollision: tiles => {
+    checkCollision: () => {
       const tilesCoordinate = tiles.map(tile => [
         tile[0] + positionX / tileSize,
         tile[1] + positionY / tileSize
