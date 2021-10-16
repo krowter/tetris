@@ -38,6 +38,19 @@ const isColliding = (bakedTilesCoordinate, tiles) => {
   }
 };
 
+const handleCollision = (bakedTilesCoordinate, tilesCoordinate) => {
+  bakeTiles(bakedTilesCoordinate, tilesCoordinate);
+  spawnNewShape();
+
+  const points = checkTilesForPoints(bakedTilesCoordinate);
+
+  if (points) {
+    const currentPoint = document.getElementById("points").textContent;
+    document.getElementById("points").innerHTML =
+      parseInt(currentPoint) + points;
+  }
+};
+
 // clear canvas for redrawing and draw baked tiles
 const clearCanvas = (context, bakedTilesCoordinate) => {
   context.clearRect(0, 0, canvas.width, canvas.height);
@@ -72,7 +85,7 @@ const checkTilesForPoints = bakedTilesCoordinate => {
 };
 
 // create a shape and return callback to draw it
-const createObject = ({ shape, x, y }) => {
+const createShape = ({ shape, x, y }) => {
   let positionY = y,
     positionX = x,
     rotation = 0,
@@ -90,7 +103,6 @@ const createObject = ({ shape, x, y }) => {
       rotation %= 360;
     }
   });
-
   return {
     draw: () => {
       positionY += tileSize;
@@ -103,16 +115,7 @@ const createObject = ({ shape, x, y }) => {
       ]);
 
       if (isColliding(bakedTilesCoordinate, tilesCoordinate)) {
-        bakeTiles(bakedTilesCoordinate, tilesCoordinate);
-        spawnNewShape();
-
-        const points = checkTilesForPoints(bakedTilesCoordinate);
-
-        if (points) {
-          const currentPoint = document.getElementById("points").textContent;
-          document.getElementById("points").innerHTML =
-            parseInt(currentPoint) + points;
-        }
+        handleCollision(bakedTilesCoordinate, tilesCoordinate);
       }
     }
   };
