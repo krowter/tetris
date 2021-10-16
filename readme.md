@@ -9,6 +9,6 @@
 - Arrow right to move shape right
 - Arrow down so shape falls faster (NEW)
 
-_coming soon_
+## Available Shapes
 
-- More shapes!
+![preview](./assets/available_shapes.png)
