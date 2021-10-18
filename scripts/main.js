@@ -50,7 +50,7 @@ for (let height = 0; height < CANVAS_HEIGHT; height++) {
 
 let newShape;
 const spawnNewShape = () => {
-  const letters = ["L", "I", "S", "Z"];
+  const letters = ["L", "I", "S", "Z", "T", "J"];
   newShape = createShape({
     letter: pickRandomItem(letters),
     x: (CANVAS_WIDTH * TILE_SIZE) / 2, // center of canvas horizontally
