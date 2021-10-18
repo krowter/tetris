@@ -1,4 +1,4 @@
-const shapes = {
+const SHAPES = {
   L0: [
     [0, 0],
     [-1, 0],

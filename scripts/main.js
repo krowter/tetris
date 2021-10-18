@@ -7,7 +7,7 @@ const CANVAS_HEIGHT = 20; // tiles
 const CANVAS_WIDTH = 20; // tiles
 
 const DEFAULT_STEP_RATE = 300; // miliseconds
-const fAST_STEP_RATE = 50; // miliseconds
+const FAST_STEP_RATE = 50; // miliseconds
 const globalStepRate = (() => {
   let current = DEFAULT_STEP_RATE;
 
@@ -50,9 +50,9 @@ for (let height = 0; height < CANVAS_HEIGHT; height++) {
 
 let newShape;
 const spawnNewShape = () => {
-  const shapes = ["L", "I", "S", "Z"];
+  const SHAPES = ["L", "I", "S", "Z"];
   newShape = createShape({
-    shape: pickRandomItem(shapes),
+    shape: pickRandomItem(SHAPES),
     x: (CANVAS_WIDTH * TILE_SIZE) / 2, // center of canvas horizontally
     y: 0
   });

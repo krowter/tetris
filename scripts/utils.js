@@ -4,9 +4,9 @@ const drawTile = (context, x, y) => {
   context.fill();
 };
 
-// draw shapes based on _shape param: L or I
+// draw SHAPES based on _shape param: L or I
 const drawShape = (context, _shape, x, y) => {
-  const shape = shapes[_shape];
+  const shape = SHAPES[_shape];
 
   shape.forEach(([deltaX, deltaY]) => {
     drawTile(context, x + deltaX * TILE_SIZE, y + deltaY * TILE_SIZE);
@@ -120,6 +120,7 @@ const createShape = ({ shape, x, y }) => {
   return {
     draw: () => {
       positionY += TILE_SIZE;
+
       tiles = drawShape(context, shape + rotation, positionX, positionY);
     },
     checkCollision: () => {
