@@ -4,10 +4,7 @@ const drawTile = (context, x, y) => {
   context.fill();
 };
 
-// draw SHAPES based on _shape param: L or I
-const drawShape = (context, _shape, x, y) => {
-  const shape = SHAPES[_shape];
-
+const drawShape = (context, shape, x, y) => {
   shape.forEach(([deltaX, deltaY]) => {
     drawTile(context, x + deltaX * TILE_SIZE, y + deltaY * TILE_SIZE);
   });
@@ -89,7 +86,7 @@ const checkTilesForPoints = bakedTilesCoordinate => {
 };
 
 // create a shape and return callback to draw it
-const createShape = ({ shape, x, y }) => {
+const createShape = ({ letter, x, y }) => {
   let positionY = y,
     positionX = x,
     rotation = 0,
@@ -121,7 +118,8 @@ const createShape = ({ shape, x, y }) => {
     draw: () => {
       positionY += TILE_SIZE;
 
-      tiles = drawShape(context, shape + rotation, positionX, positionY);
+      const shape = SHAPES[letter + rotation];
+      tiles = drawShape(context, shape, positionX, positionY);
     },
     checkCollision: () => {
       const tilesCoordinate = tiles.map(tile => [
