@@ -1,3 +1,20 @@
+/*
+ * Each shape is named in the format of <name><rotation in degrees>
+ *
+ * Example:
+ * L90 is the shape L rotated 90 degrees clockwise
+ *
+ * Each tile is coordinate-based, [x, y]
+ *
+ * Example:
+ * [0, 0] is the origin tile
+ * [-1, 0] 1 tile to the left of origin
+ * [1, 0] 1 tile to the right of origin
+ * [0, -1] 1 tile on top of origin
+ * [0, 1] 1 tile below the origin
+ *
+ */
+
 const SHAPES = {
   L0: [
     [0, 0],
