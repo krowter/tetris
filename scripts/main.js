@@ -16,7 +16,7 @@ const globalStepRate = (() => {
       return current;
     },
     setToFast() {
-      current = fAST_STEP_RATE;
+      current = FAST_STEP_RATE;
     },
     reset() {
       current = DEFAULT_STEP_RATE;
