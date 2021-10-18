@@ -1,6 +1,6 @@
 const drawTile = (context, x, y) => {
   context.beginPath();
-  context.rect(x, y, tileSize, tileSize);
+  context.rect(x, y, TILE_SIZE, TILE_SIZE);
   context.fill();
 };
 
@@ -9,7 +9,7 @@ const drawShape = (context, _shape, x, y) => {
   const shape = shapes[_shape];
 
   shape.forEach(([deltaX, deltaY]) => {
-    drawTile(context, x + deltaX * tileSize, y + deltaY * tileSize);
+    drawTile(context, x + deltaX * TILE_SIZE, y + deltaY * TILE_SIZE);
   });
 
   return shape;
@@ -27,7 +27,7 @@ const isColliding = (bakedTilesCoordinate, tiles) => {
     const tile = tiles[i];
 
     // collision with bottom of canvas
-    if ((tile[1] + 2) * tileSize > canvas.height) {
+    if ((tile[1] + 2) * TILE_SIZE > canvas.height) {
       return true;
     }
 
@@ -58,8 +58,8 @@ const clearCanvas = (context, bakedTilesCoordinate) => {
   bakedTilesCoordinate.forEach((row, rowIndex) => {
     row.forEach((tile, columnIndex) => {
       if (tile === 1) {
-        const positionX = columnIndex * tileSize;
-        const positionY = rowIndex * tileSize;
+        const positionX = columnIndex * TILE_SIZE;
+        const positionY = rowIndex * TILE_SIZE;
 
         drawTile(context, positionX, positionY);
       }
@@ -78,14 +78,14 @@ const checkTilesForPoints = bakedTilesCoordinate => {
     }
   }
 
-  const emptyRow = Array.from(Array(canvasWidth)).map(() => 0);
+  const emptyRow = Array.from(Array(CANVAS_WIDTH)).map(() => 0);
   fullRowIndexes.forEach(index => {
     bakedTilesCoordinate.splice(index, 1);
     bakedTilesCoordinate.unshift(emptyRow);
   });
 
   // use canvas width as points, ie 20 tiles worth 20 points
-  return canvasWidth * fullRowIndexes.length;
+  return CANVAS_WIDTH * fullRowIndexes.length;
 };
 
 // create a shape and return callback to draw it
@@ -97,17 +97,17 @@ const createShape = ({ shape, x, y }) => {
 
   document.body.addEventListener("keydown", event => {
     if (event.key === "ArrowRight") {
-      positionX += tileSize;
+      positionX += TILE_SIZE;
     }
     if (event.key === "ArrowLeft") {
-      positionX -= tileSize;
+      positionX -= TILE_SIZE;
     }
     if (event.key === "ArrowUp") {
       rotation += 90;
       rotation %= 360;
     }
     if (event.key === "ArrowDown") {
-      globalStepRate.setTo(50);
+      globalStepRate.setToFast();
     }
   });
 
@@ -119,13 +119,13 @@ const createShape = ({ shape, x, y }) => {
 
   return {
     draw: () => {
-      positionY += tileSize;
+      positionY += TILE_SIZE;
       tiles = drawShape(context, shape + rotation, positionX, positionY);
     },
     checkCollision: () => {
       const tilesCoordinate = tiles.map(tile => [
-        tile[0] + positionX / tileSize,
-        tile[1] + positionY / tileSize
+        tile[0] + positionX / TILE_SIZE,
+        tile[1] + positionY / TILE_SIZE
       ]);
 
       if (isColliding(bakedTilesCoordinate, tilesCoordinate)) {

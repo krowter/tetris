@@ -2,23 +2,24 @@
  * constants
  */
 
-const tileSize = 20; // px / tiles
-const canvasHeight = 20; // tiles
-const canvasWidth = 20; // tiles
+const TILE_SIZE = 20; // px / tiles
+const CANVAS_HEIGHT = 20; // tiles
+const CANVAS_WIDTH = 20; // tiles
 
-const defaultStepRate = 300; // miliseconds
+const DEFAULT_STEP_RATE = 300; // miliseconds
+const fAST_STEP_RATE = 50; // miliseconds
 const globalStepRate = (() => {
-  let current = defaultStepRate;
+  let current = DEFAULT_STEP_RATE;
 
   return {
     get value() {
       return current;
     },
-    setTo(value) {
-      current = value;
+    setToFast() {
+      current = fAST_STEP_RATE;
     },
     reset() {
-      current = defaultStepRate;
+      current = DEFAULT_STEP_RATE;
     }
   };
 })();
@@ -30,14 +31,14 @@ const globalStepRate = (() => {
 const canvas = document.getElementById("game");
 const context = canvas.getContext("2d");
 
-canvas.height = canvasHeight * tileSize;
-canvas.width = canvasWidth * tileSize;
+canvas.height = CANVAS_HEIGHT * TILE_SIZE;
+canvas.width = CANVAS_WIDTH * TILE_SIZE;
 
 // 2D array to keep track of drawn tiles
 const bakedTilesCoordinate = [];
-for (let height = 0; height < canvasHeight; height++) {
+for (let height = 0; height < CANVAS_HEIGHT; height++) {
   const row = [];
-  for (let width = 0; width < canvasWidth; width++) {
+  for (let width = 0; width < CANVAS_WIDTH; width++) {
     row.push(0);
   }
   bakedTilesCoordinate.push(row);
