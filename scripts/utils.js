@@ -48,10 +48,12 @@ const handleCollision = (bakedTilesCoordinate, tilesCoordinate) => {
   }
 };
 
-// clear canvas for redrawing and draw baked tiles
-const clearCanvas = (context, bakedTilesCoordinate) => {
+// clear canvas for redrawing
+const clearCanvas = context => {
   context.clearRect(0, 0, canvas.width, canvas.height);
+};
 
+const drawBakedTiles = (context, bakedTilesCoordinate) => {
   bakedTilesCoordinate.forEach((row, rowIndex) => {
     row.forEach((tile, columnIndex) => {
       if (tile === 1) {
